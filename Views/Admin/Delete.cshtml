@@ -1,0 +1,11 @@
+@model WebProje.Models.MythCard
+
+<h2>Hikayeyi Sil</h2>
+
+<p><strong>@Model.Baslik</strong> adlı hikayeyi silmek istiyor musunuz?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+</form>

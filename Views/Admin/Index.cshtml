@@ -1,0 +1,44 @@
+@model IEnumerable<WebProje.Models.MythCard>
+
+@{
+    ViewData["Title"] = "Admin Paneli";
+    ViewData["BodyId"] = "admin-page";
+}
+@{
+    Layout = "_Layout";
+}
+<div class="container mt-5 p-4 rounded" id="admin-panel-body">
+
+    <h2 class="mb-4 text-primary">Hikaye Listesi</h2>
+
+    <div class="d-flex justify-content-between mb-3">
+        <a asp-action="Create" class="btn btn-success">+ Yeni Hikaye Ekle</a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">← Ana Sayfaya Dön</a>
+    </div>
+
+    <table border="1">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">Mitoloji Türü</th>
+                <th scope="col">İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kart in Model)
+            {
+                <tr>
+                    <td>@kart.Id</td>
+                    <td>@kart.Baslik</td>
+                    <td>@kart.MitolojiTuru</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@kart.Id" class="btn btn-sm btn-outline-danger">
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,78 @@
+
+@model IEnumerable<WebProje.Models.MythCard>
+ @{
+    ViewData["Title"] = "Nordik Mitoloji";
+    ViewData["BodyId"] = "nordik-page";
+}
+        <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitoloji'nin Ruhu</title>
+    <link rel="stylesheet" href="~/css/stylemyth.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body id="nordik-page">
+  
+
+<!-- KARTLAR -->
+<div class="container mt-5 italic-highlight">
+    <h1 class="mb-4">Antik İskandinav Mitolojisi</h1>
+    <div class="row">
+       @foreach (var kart in Model)
+{
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="@kart.ResimUrl" class="card-img-top img-fluid" alt="@kart.Baslik" />
+            <div class="card-body">
+                <h5 class="card-title">@kart.Baslik</h5>
+
+                <p class="card-text">
+                    @kart.Aciklama.Substring(0, Math.Min(200, kart.Aciklama.Length))...
+                </p>
+
+                <div id="fullText-@kart.Id" class="card-text text-secondary d-none">
+                    @kart.Aciklama
+                </div>
+
+                <button class="btn btn-outline-primary btn-sm" id="devamı" onclick="toggleText(@kart.Id, this)">Devamı</button>
+            </div>
+        </div>
+    </div>
+}
+    </div>
+</div>
+
+<audio id="myAudio" class="custom-audio" controls autoplay loop>
+    <source src="~/mp3/nordik.mp3" type="audio/mpeg">
+    Tarayıcınız bu sesi desteklemiyor.
+</audio>
+
+<footer id="nordik-footer">
+    <p>© 2025 İskandinav Mitolojisi. Tüm Hakları Saklıdır.</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+pmwGIk1p6LJIm+1eg1qXGxBv1z4"
+    crossorigin="anonymous"></script>
+<script src="~/js/main.js"></script>
+
+<script>
+    function toggleText(id, button) {
+        const text = document.getElementById('fullText-' + id);
+        if (text.classList.contains('d-none')) {
+            text.classList.remove('d-none');
+            button.innerText = 'Gizle';
+        } else {
+            text.classList.add('d-none');
+            button.innerText = 'Devamı';
+        }
+    }
+</script>
+
+</body>
+</html>

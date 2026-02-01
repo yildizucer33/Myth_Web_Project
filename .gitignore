@@ -1,0 +1,13 @@
+# Build outputs
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.db
+*.mdf
+*.ldf
+# Local environment files (SECRETS)
+appsettings.Development.json
